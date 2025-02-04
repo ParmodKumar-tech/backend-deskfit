@@ -12,8 +12,8 @@ const UserRoute=require("../backend/routes/user");
 
 
 
-const dbURL="mongodb://127.0.0.1:27017/deskworker"
-// const dbURL=process.env.ATLASDB_URL;
+// const dbURL="mongodb://127.0.0.1:27017/deskworker"
+const dbURL=process.env.ATLASDB_URL;
 
 app.use(cors());
 app.use(express.json());
