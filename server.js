@@ -29,21 +29,25 @@ async function connectDB() {
 }
 connectDB();
 
-// ✅ Define Routes
-app.get("/", (req, res) => {
-    res.send("✅ Backend is running successfully!");
-});
+app.use("/",ExerciseRoute);
+app.use("/user",UserRoute);
 
-// ✅ Handle 404 Errors
-app.use((req, res) => {
-    res.status(404).json({ error: "Not Found" });
-});
 
-// ✅ Handle Internal Server Errors (Prevents Crashes)
-app.use((err, req, res, next) => {
-    console.error("❌ Internal Server Error:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
-});
+// // ✅ Define Routes
+// app.get("/", (req, res) => {
+//     res.send("✅ Backend is running successfully!");
+// });
+
+// // ✅ Handle 404 Errors
+// app.use((req, res) => {
+//     res.status(404).json({ error: "Not Found" });
+// });
+
+// // ✅ Handle Internal Server Errors (Prevents Crashes)
+// app.use((err, req, res, next) => {
+//     console.error("❌ Internal Server Error:", err.message);
+//     res.status(500).json({ error: "Internal Server Error" });
+// });
 
 // ✅ Export for Vercel (No `app.listen()`)
 module.exports = app;
