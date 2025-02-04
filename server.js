@@ -11,7 +11,7 @@ console.log("🚀 Server file is running...");
 
 // ✅ Fix CORS Policy
 const corsConfig = {
-    origin: ["https://full-stack-desk-4gralvbl6-parmod-kumars-projects-75c684e4.vercel.app/"],
+    origin: ["https://full-stack-desk-4gralvbl6-parmod-kumars-projects-75c684e4.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 };
