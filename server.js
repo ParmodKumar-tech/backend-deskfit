@@ -1,43 +1,49 @@
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-require('dotenv').config();
+const app = express();
+const PORT = process.env.PORT || 3000;
+const dbURL = process.env.ATLASDB_URL;
 
-const express=require("express");
-const app=express();
-const PORT=process.env.PORT || 3000;
-const mongoose=require("mongoose");
-const cors=require("cors");
-const ExerciseRoute=require("../backend/routes/execrise");
-const UserRoute=require("../backend/routes/user");
+console.log("🚀 Server file is running...");
 
-
-
-
-// const dbURL="mongodb://127.0.0.1:27017/deskworker"
-const dbURL=process.env.ATLASDB_URL;
-
+// ✅ Fix CORS Policy
 const corsConfig = {
-    origin: ["https://full-stack-desk-fit.vercel.app"], // ✅ Correct frontend URL
+    origin: ["https://full-stack-desk-fit.vercel.app/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 };
-app.use(cors(corsConfig)); // ✅ Fixed syntax error
+app.use(cors(corsConfig));
 app.use(express.json());
 
-
-async function main(){
-    await mongoose.connect(dbURL)
+// ✅ Properly Handle MongoDB Connection Errors
+async function connectDB() {
+    try {
+        await mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log("✅ Connected with MongoDB");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Failed:", error.message);
+    }
 }
-main()
-.then((res)=>console.log("connected with DB"))
-.catch((e)=>{console.log(e)})
+connectDB();
 
+// ✅ Define Routes
+app.get("/", (req, res) => {
+    res.send("✅ Backend is running successfully!");
+});
 
-app.use("/",ExerciseRoute);
-app.use("/user",UserRoute);
+// ✅ Handle 404 Errors
+app.use((req, res) => {
+    res.status(404).json({ error: "Not Found" });
+});
 
+// ✅ Handle Internal Server Errors (Prevents Crashes)
+app.use((err, req, res, next) => {
+    console.error("❌ Internal Server Error:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+});
 
-module.exports=app;
-// app.listen(PORT,(req,res)=>{
-//     console.log(`server is listing on ${PORT}`);
-// })
-
+// ✅ Export for Vercel (No `app.listen()`)
+module.exports = app;
