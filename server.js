@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const express=require("express");
 const app=express();
-const PORT=process.env.PORT || 4000;
+const PORT=process.env.PORT || 3000;
 const mongoose=require("mongoose");
 const cors=require("cors");
 const ExerciseRoute=require("../backend/routes/execrise");
@@ -30,7 +30,8 @@ app.use("/",ExerciseRoute);
 app.use("/user",UserRoute);
 
 
-app.listen(PORT,(req,res)=>{
-    console.log(`server is listing on ${PORT}`);
-})
+module.exports=app;
+// app.listen(PORT,(req,res)=>{
+//     console.log(`server is listing on ${PORT}`);
+// })
 
