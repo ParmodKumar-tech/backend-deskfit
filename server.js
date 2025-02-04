@@ -15,8 +15,14 @@ const UserRoute=require("../backend/routes/user");
 // const dbURL="mongodb://127.0.0.1:27017/deskworker"
 const dbURL=process.env.ATLASDB_URL;
 
-app.use(cors());
+const corsConfig = {
+    origin: ["https://full-stack-desk-fit.vercel.app"], // ✅ Correct frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsConfig)); // ✅ Fixed syntax error
 app.use(express.json());
+
 
 async function main(){
     await mongoose.connect(dbURL)
