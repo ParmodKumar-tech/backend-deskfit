@@ -43,11 +43,11 @@ app.use("/user",UserRoute);
 //     res.status(404).json({ error: "Not Found" });
 // });
 
-// // ✅ Handle Internal Server Errors (Prevents Crashes)
-// app.use((err, req, res, next) => {
-//     console.error("❌ Internal Server Error:", err.message);
-//     res.status(500).json({ error: "Internal Server Error" });
-// });
+// ✅ Handle Internal Server Errors (Prevents Crashes)
+app.use((err, req, res, next) => {
+    console.error("❌ Internal Server Error:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+});
 
 // ✅ Export for Vercel (No `app.listen()`)
 module.exports = app;
