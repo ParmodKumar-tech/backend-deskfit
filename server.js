@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const ExerciseRoute=require("../routes/exercise.js");
+const UserRoute=require("../routes/user.js");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const dbURL = process.env.ATLASDB_URL;
