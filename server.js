@@ -11,13 +11,14 @@ const dbURL = process.env.ATLASDB_URL;
 
 console.log("🚀 Server file is running...");
 
-// ✅ Fix CORS Policy
-const corsConfig = {
-    origin: ["https://full-stack-desk-fit.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-};
-app.use(cors(corsConfig));
-app.use(express.json());
+// // ✅ Fix CORS Policy
+// const corsConfig = {
+//     origin: ["https://full-stack-desk-fit.vercel.app"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+// };
+// app.use(cors(corsConfig));
+// app.use(express.json());
+
 
 // ✅ Properly Handle MongoDB Connection Errors
 async function connectDB() {
@@ -49,9 +50,9 @@ app.use((err, req, res, next) => {
 });
 
 // ✅ Export for Vercel (No `app.listen()`)
-module.exports = app;
+// module.exports = app;
 
-// app.listen(3000,(req,res)=>{
-//     console.log(`server is listing on 3000`);
-// })
+app.listen(3000,(req,res)=>{
+    console.log(`server is listing on 3000`);
+})
 
