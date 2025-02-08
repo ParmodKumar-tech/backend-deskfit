@@ -30,19 +30,17 @@ async function connectDB() {
 }
 connectDB();
 
-// app.use("/",ExerciseRoute);
-// app.use("/user",UserRoute);
 
 
-// // ✅ Define Routes
-// app.get("/", (req, res) => {
-//     res.send("✅ Backend is running successfully!");
-// });
+// ✅ Define Routes
+app.get("/", (req, res) => {
+    res.send("✅ Backend is running successfully!");
+});
 
-// // ✅ Handle 404 Errors
-// app.use((req, res) => {
-//     res.status(404).json({ error: "Not Found" });
-// });
+// ✅ Handle 404 Errors
+app.use((req, res) => {
+    res.status(404).json({ error: "Not Found" });
+});
 
 // ✅ Handle Internal Server Errors (Prevents Crashes)
 app.use((err, req, res, next) => {
@@ -52,6 +50,7 @@ app.use((err, req, res, next) => {
 
 // ✅ Export for Vercel (No `app.listen()`)
 // module.exports = app;
+
 app.listen(PORT,(req,res)=>{
     console.log(`server is listing on ${PORT}`);
 })
