@@ -30,8 +30,8 @@ async function connectDB() {
 }
 connectDB();
 
-app.use("/",ExerciseRoute);
-app.use("/user",UserRoute);
+// app.use("/",ExerciseRoute);
+// app.use("/user",UserRoute);
 
 
 // // ✅ Define Routes
