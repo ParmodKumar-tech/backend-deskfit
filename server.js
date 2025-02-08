@@ -19,6 +19,7 @@ console.log("🚀 Server file is running...");
 // app.use(cors(corsConfig));
 // app.use(express.json());
 
+app.use(cors({ origin: "*", credentials: true }));
 
 // ✅ Properly Handle MongoDB Connection Errors
 async function connectDB() {
