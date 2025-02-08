@@ -1,25 +1,25 @@
-const dotenv=require("dotenv");
+const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const ExerciseRoute=require("./routes/exercise");
-const UserRoute=require("./routes/user");
+
+const ExerciseRoute = require("./routes/exercise");  // ✅ Ensure correct import
+const UserRoute = require("./routes/user");  // ✅ Ensure correct import
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const dbURL = process.env.ATLASDB_URL;
 
 console.log("🚀 Server file is running...");
 
-// // ✅ Fix CORS Policy
-// const corsConfig = {
-//     origin: ["https://full-stack-desk-fit.vercel.app"],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-// };
-// app.use(cors(corsConfig));
-// app.use(express.json());
-
-app.use(cors({ origin: "*", credentials: true }));
+// ✅ Fix CORS Policy (Allow Frontend)
+app.use(cors({
+    origin: ["https://full-stack-desk-fit.vercel.app"],  // ✅ Your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
+app.use(express.json());  // ✅ Enable JSON parsing
 
 // ✅ Properly Handle MongoDB Connection Errors
 async function connectDB() {
@@ -28,13 +28,15 @@ async function connectDB() {
         console.log("✅ Connected with MongoDB");
     } catch (error) {
         console.error("❌ MongoDB Connection Failed:", error.message);
+        process.exit(1);  // ✅ Exit process if MongoDB connection fails
     }
 }
 connectDB();
 
-
-
 // ✅ Define Routes
+app.use("/api/exercise", ExerciseRoute);  // ✅ Fix missing route
+app.use("/api/user", UserRoute);  // ✅ Fix missing route
+
 app.get("/", (req, res) => {
     res.send("✅ Backend is running successfully!");
 });
@@ -52,8 +54,3 @@ app.use((err, req, res, next) => {
 
 // ✅ Export for Vercel (No `app.listen()`)
 module.exports = app;
-
-// app.listen(3000,(req,res)=>{
-//     console.log(`server is listing on 3000`);
-// })
-
