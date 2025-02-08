@@ -49,9 +49,9 @@ app.use((err, req, res, next) => {
 });
 
 // ✅ Export for Vercel (No `app.listen()`)
-// module.exports = app;
+module.exports = app;
 
-app.listen(3000,(req,res)=>{
-    console.log(`server is listing on 3000`);
-})
+// app.listen(3000,(req,res)=>{
+//     console.log(`server is listing on 3000`);
+// })
 
