@@ -53,4 +53,6 @@ app.use((err, req, res, next) => {
 });
 
 // ✅ Export for Vercel (No `app.listen()`)
-module.exports = app;
+app.listen(PORT,()=>{
+    console.log("server is listening...");
+})
